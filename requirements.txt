@@ -1,0 +1,15 @@
+# Dependencies for the AICI pipeline and comparator models.
+numpy>=1.24
+pandas>=2
+scipy>=1.10
+scikit-learn>=1.3
+torch>=2.2
+xgboost>=2.0
+optuna>=3.5
+tqdm
+matplotlib
+openpyxl
+dill
+pytorch-tabnet
+seaborn
+joblib>=1.3

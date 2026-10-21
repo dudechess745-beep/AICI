@@ -1,0 +1,7 @@
+# MIMIC-IV Data Extraction and Preprocessing
+
+Import MIMIC-IV 2.0 into PostgreSQL and prepare the derived GCS, Sepsis-3, and hourly allocated input-volume tables (`public.gcs`, `public.sepsis3`, and `public.input1`). Adjust `mimic_icu`, `mimic_hosp`, and other schema names in the scripts to match your database. These derived tables must be generated through the corresponding data-processing procedures before running the scripts.
+
+Run `mimiciv_preprocess.sql` first to organize vital signs, laboratory results, GCS, urine output, and input volumes. Then run `mimiciv_extract.sql` to merge records and select sepsis and non-sepsis data, saved as `table3` and `table3_no` in the `aici_extract` schema. If demographic information is needed, prepare `public.age` and run `mimiciv_demographics_optional.sql`. The scripts do not overwrite existing output tables; use a different output schema when rerunning them.
+
+After export, organize the data by hospital stay, map item identifiers to variable names, standardize units, and align records to hourly intervals before following the Python workflow `build-hourly → fit-iqr → prepare → fit`. Skip `build-hourly` if hourly wide-format tables are already available. Use `sofa_time` as the diagnosis reference time for sepsis records; do not substitute the end of observation for a diagnosis time in non-sepsis records. Select the final input variables according to `configs/C2_schema.json`. Diagnosis time is used only to construct labels and is not included as a model input.

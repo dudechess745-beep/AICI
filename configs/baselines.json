@@ -1,0 +1,145 @@
+{
+  "seed": 3407,
+  "threads": 4,
+  "models": {
+    "random_forest": {
+      "fill_value": 0.0,
+      "trials": 10,
+      "params": {
+        "n_estimators": 1000,
+        "max_depth": 9,
+        "min_samples_split": 100,
+        "max_features": 14,
+        "min_samples_leaf": 40
+      },
+      "cohorts": {
+        "C1": {
+          "params_by_fold": {
+            "min_samples_split": [
+              100,
+              80,
+              80,
+              100,
+              100
+            ],
+            "max_features": [
+              14,
+              14,
+              13,
+              13,
+              14
+            ],
+            "min_samples_leaf": [
+              40,
+              40,
+              45,
+              40,
+              45
+            ]
+          }
+        },
+        "C2": {
+          "search": {
+            "n_estimators": [
+              1000,
+              1200
+            ],
+            "min_samples_split": [
+              80,
+              100,
+              120
+            ],
+            "max_features": [
+              17,
+              20,
+              25
+            ],
+            "max_depth": [
+              17,
+              18,
+              19
+            ],
+            "min_samples_leaf": [
+              40,
+              45
+            ]
+          }
+        }
+      },
+      "device": "cpu"
+    },
+    "xgboost": {
+      "trials": 30,
+      "rounds": 500,
+      "patience": 30,
+      "device": "cpu"
+    },
+    "tabnet": {
+      "n_d": 8,
+      "n_a": 8,
+      "n_steps": 3,
+      "lr": 0.013,
+      "epochs": 1000,
+      "patience": 5,
+      "batch_size": 2048,
+      "virtual_batch_size": 1024,
+      "fill_value": 0.0,
+      "cohorts": {
+        "C2": {
+          "lr": 0.0003,
+          "patience": 3,
+          "fill_value": -7.0
+        }
+      },
+      "device": "cuda"
+    },
+    "lstm": {
+      "hidden_size": 256,
+      "dropout": 0.5,
+      "batch_size": 128,
+      "lr": 0.0005,
+      "epochs": 100,
+      "patience": 5,
+      "fill_value": 0.0,
+      "cohorts": {
+        "C1": {
+          "patience": 3
+        }
+      },
+      "device": "cuda"
+    },
+    "gru": {
+      "hidden_size": 256,
+      "dropout": 0.5,
+      "batch_size": 128,
+      "lr": 0.0005,
+      "epochs": 100,
+      "patience": 5,
+      "fill_value": 0.0,
+      "cohorts": {
+        "C1": {
+          "patience": 3
+        },
+        "C2": {
+          "lr": 0.0002
+        }
+      },
+      "device": "cuda"
+    },
+    "lf_transformer": {
+      "batch_size": 32,
+      "n_layers": 2,
+      "d_token": 128,
+      "d_ffn_factor": 1.5,
+      "attention_dropout": 0.1,
+      "ffn_dropout": 0.1,
+      "residual_dropout": 0.0,
+      "lr": 0.0001,
+      "weight_decay": 0.0001,
+      "epochs": 200,
+      "patience": 10,
+      "fill_value": -7.0,
+      "device": "cuda"
+    }
+  }
+}
